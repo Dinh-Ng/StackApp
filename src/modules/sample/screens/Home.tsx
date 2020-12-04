@@ -2,15 +2,14 @@ import Text from '@core/Text'
 import { sizing } from '@styles/fonts'
 import metrics from '@styles/metrics'
 import { useRequest } from 'ahooks'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { StyleSheet, View } from 'react-native'
-import { FlatList } from 'react-native-gesture-handler'
+import { FlatList, TouchableWithoutFeedback } from 'react-native-gesture-handler'
 import request from 'src/api/request'
 import { logger } from 'src/utilities/logger'
 import HomeHeader from '../components/HomeHeader'
 
 const Home = (props: any) => {
-    const [data, setData] = useState<any>([])
     const getListApi = () => request.get('/questions?order=desc&sort=votes&site=stackoverflow')
 
     const getListRequest = useRequest(getListApi, {
@@ -22,7 +21,7 @@ const Home = (props: any) => {
 
     const renderItem = (item: any) => {
         return (
-            <View style={styles.item}>
+            <TouchableWithoutFeedback style={styles.item}>
                 <View style={styles.voteContainer}>
                     <Text children={item?.score + ' votes'} style={styles.voteText} />
                     <Text
@@ -43,23 +42,22 @@ const Home = (props: any) => {
                         </View>
                     ))}
                 </View>
-            </View>
+            </TouchableWithoutFeedback>
         )
     }
 
     useEffect(() => {
         getListRequest.run()
-        setData(getListRequest.data)
     }, [])
 
-    // logger('data', false, getListRequest.data)
+    logger('data', false, getListRequest.data)
 
     return (
         <View style={styles.container}>
             <HomeHeader onPressMenu={() => props.navigation.openDrawer()} />
             <FlatList
                 style={styles.list}
-                data={data?.items}
+                data={getListRequest.data?.items}
                 renderItem={(item) => renderItem(item?.item)}
                 keyExtractor={(_item, index) => index.toString()}
             />
