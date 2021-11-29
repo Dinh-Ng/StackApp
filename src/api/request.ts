@@ -2,7 +2,7 @@ import axios from 'axios'
 import { apiLogger } from 'src/utilities/logger'
 
 const request = axios.create({
-    baseURL: 'https://api.stackexchange.com/2.2',
+    baseURL: 'https://api.stackexchange.com/2.3',
     timeout: 8000,
     headers: { Accept: '*/*' },
 })
