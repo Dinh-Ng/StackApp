@@ -20,6 +20,8 @@
     "react-hooks/exhaustive-deps": "warn",
     "camelcase": "off",
 
+    "semi": "off",
+
     "implicit-arrow-linebreak": [0],
     "no-use-before-define": [1],
     "linebreak-style": [1],

@@ -1,13 +1,13 @@
+import React, { useEffect } from 'react'
+import { StyleSheet, View } from 'react-native'
 import Text from '@core/Text'
 import { sizing } from '@styles/fonts'
 import metrics from '@styles/metrics'
 import { useRequest } from 'ahooks'
-import React, { useEffect } from 'react'
-import { StyleSheet, View } from 'react-native'
 import { FlatList, TouchableWithoutFeedback } from 'react-native-gesture-handler'
 import request from 'src/api/request'
 import { logger } from 'src/utilities/logger'
-import HomeHeader from '../components/HomeHeader'
+import HomeHeader from '@modules/UI/components/HomeHeader'
 
 const Home = (props: any) => {
     const getListApi = () => request.get('/questions?order=desc&sort=votes&site=stackoverflow')
@@ -19,32 +19,30 @@ const Home = (props: any) => {
 
     logger('props', false, props)
 
-    const renderItem = (item: any) => {
-        return (
-            <TouchableWithoutFeedback style={styles.item}>
-                <View style={styles.voteContainer}>
-                    <Text children={item?.score + ' votes'} style={styles.voteText} />
-                    <Text
-                        children={item?.answer_count + (item?.answer_count > 1 ? ' answers' : ' answer')}
-                        style={[
-                            styles.voteText,
-                            item?.answer_count > 0 && styles.answerText,
-                            item?.is_answered && styles.answerAcceptText,
-                        ]}
-                    />
-                    <Text children={item?.view_count + ' views'} style={styles.voteText} />
-                </View>
-                <Text children={item?.title} style={styles.title} />
-                <View style={styles.tagContainer}>
-                    {item?.tags?.map((tag: any, index: number) => (
-                        <View style={styles.tag} key={index}>
-                            <Text children={tag} style={styles.tagText} />
-                        </View>
-                    ))}
-                </View>
-            </TouchableWithoutFeedback>
-        )
-    }
+    const renderItem = (item: any) => (
+        <TouchableWithoutFeedback style={styles.item}>
+            <View style={styles.voteContainer}>
+                <Text children={item?.score + ' votes'} style={styles.voteText} />
+                <Text
+                    children={item?.answer_count + (item?.answer_count > 1 ? ' answers' : ' answer')}
+                    style={[
+                        styles.voteText,
+                        item?.answer_count > 0 && styles.answerText,
+                        item?.is_answered && styles.answerAcceptText,
+                    ]}
+                />
+                <Text children={item?.view_count + ' views'} style={styles.voteText} />
+            </View>
+            <Text children={item?.title} style={styles.title} />
+            <View style={styles.tagContainer}>
+                {item?.tags?.map((tag: any, index: number) => (
+                    <View style={styles.tag} key={index}>
+                        <Text children={tag} style={styles.tagText} />
+                    </View>
+                ))}
+            </View>
+        </TouchableWithoutFeedback>
+    )
 
     useEffect(() => {
         getListRequest.run()
@@ -124,7 +122,7 @@ const styles = StyleSheet.create({
     },
     answerAcceptText: {
         backgroundColor: '#5a9e6f',
-        color: '#fff'
+        color: '#fff',
     },
 })
 

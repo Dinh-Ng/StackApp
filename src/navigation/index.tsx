@@ -4,11 +4,10 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer'
 
-import Home from '@modules/sample'
-import Sample from '@modules/sample/screens/Sample'
+import Home from '@modules/UI/screens/Home'
 
 import { RootStackParamList } from '@navigation/types'
-import HomeDrawer from '@modules/sample/components/HomeDrawer'
+import HomeDrawer from '@modules/UI/components/HomeDrawer'
 
 const Stack = createStackNavigator<RootStackParamList>()
 const Drawer = createDrawerNavigator()
@@ -32,7 +31,6 @@ const DrawerStack = () => {
             )}
         >
             <Drawer.Screen name="Home" component={Home} />
-            <Drawer.Screen name="Sample" component={Sample} />
         </Drawer.Navigator>
     )
 }
