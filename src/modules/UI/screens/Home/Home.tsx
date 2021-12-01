@@ -20,7 +20,7 @@ const Home = (props: any) => {
     logger('props', false, props)
 
     const renderItem = (item: any) => (
-        <TouchableWithoutFeedback style={styles.item}>
+        <TouchableWithoutFeedback style={styles.item} onPress={() => props.navigation.navigate("Question")}>
             <View style={styles.voteContainer}>
                 <Text children={item?.score + ' votes'} style={styles.voteText} />
                 <Text
