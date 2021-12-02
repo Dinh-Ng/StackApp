@@ -5,7 +5,11 @@ import metrics from '@styles/metrics'
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
-const HomeDrawer = (props: any) => {
+interface HomeDrawerProps {
+    navigation: any
+}
+
+const HomeDrawer: React.FC<HomeDrawerProps> = ({navigation}: HomeDrawerProps) => {
     const [index, setIndex] = useState<Number>(0)
 
     const Children = ({ indexC, icon, iconSize, name, onPress }: any) => {
@@ -22,7 +26,7 @@ const HomeDrawer = (props: any) => {
 
     return (
         <ScrollView style={styles.container}>
-            <Children onPress={() => props.navigation.closeDrawer()} icon="close" iconSize={28} />
+            <Children onPress={() => navigation.closeDrawer()} icon="close" iconSize={28} />
             <Text children="PUBLIC" style={styles.groupText} />
             <Children indexC={0} onPress={() => setIndex(0)} icon="globe" name="Stack Overflow" />
             <Children indexC={1} onPress={() => setIndex(1)} icon="tag" name="Tags" />

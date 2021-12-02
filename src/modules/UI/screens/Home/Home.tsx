@@ -1,15 +1,21 @@
 import React, { useEffect } from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, FlatList } from 'react-native'
+import {  TouchableWithoutFeedback } from 'react-native-gesture-handler'
+import { useRequest } from 'ahooks'
+
 import Text from '@core/Text'
 import { sizing } from '@styles/fonts'
 import metrics from '@styles/metrics'
-import { useRequest } from 'ahooks'
-import { FlatList, TouchableWithoutFeedback } from 'react-native-gesture-handler'
 import request from 'src/api/request'
 import { logger } from 'src/utilities/logger'
 import HomeHeader from '@modules/UI/components/HomeHeader'
 
-const Home = (props: any) => {
+interface HomeProps {
+    navigation: any
+    route: any
+}
+
+const Home: React.FC<HomeProps> = ({ navigation, route }: HomeProps) => {
     const getListApi = () => request.get('/questions?order=desc&sort=votes&site=stackoverflow')
 
     const getListRequest = useRequest(getListApi, {
@@ -17,10 +23,10 @@ const Home = (props: any) => {
         loadMore: false,
     })
 
-    logger('props', false, props)
+    logger('route', false, route)
 
     const renderItem = (item: any) => (
-        <TouchableWithoutFeedback style={styles.item} onPress={() => props.navigation.navigate("Question")}>
+        <TouchableWithoutFeedback style={styles.item} onPress={() => navigation.navigate('Question')}>
             <View style={styles.voteContainer}>
                 <Text children={item?.score + ' votes'} style={styles.voteText} />
                 <Text
@@ -50,14 +56,18 @@ const Home = (props: any) => {
 
     logger('data', false, getListRequest.data)
 
+    console.log(`getListRequest.loading`, getListRequest.loading)
+
     return (
         <View style={styles.container}>
-            <HomeHeader onPressMenu={() => props.navigation.openDrawer()} />
+            <HomeHeader onPressMenu={() => navigation.openDrawer()} />
             <FlatList
                 style={styles.list}
                 data={getListRequest.data?.items}
                 renderItem={(item) => renderItem(item?.item)}
                 keyExtractor={(_item, index) => index.toString()}
+                refreshing={getListRequest.loading}
+                onRefresh={() => getListRequest.run()}
             />
         </View>
     )
