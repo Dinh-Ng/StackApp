@@ -6,7 +6,24 @@ import { sizing, styling } from '@styles/fonts'
 
 import { TextProps, Styled } from '@core/types'
 
-const Entities = require('html-entities').AllHtmlEntities;
+const Entities = require('html-entities').AllHtmlEntities
+
+interface weightProps {
+    LIGHT: string
+    REGULAR: string
+    MEDIUM: string
+    BOLD: string
+}
+
+interface sizingProps {
+    SMALLEST: number
+    SMALLER: number
+    SMALL: number
+    MEDIUM: number
+    LARGE: number
+    LARGER: number
+    LARGEST: number
+}
 
 const Text = ({ children, type, ...props }: TextProps) => {
     const entities = new Entities()
@@ -37,9 +54,9 @@ const Text = ({ children, type, ...props }: TextProps) => {
 }
 
 const StyledText = styled.Text<Styled<TextProps>>`
-    color: ${({ theme, color }) => theme[color || 'DARKEST']};
-    font-size: ${({ size }) => (typeof size === 'string' ? sizing[size] : size) || sizing.MEDIUM}px;
-    font-family: ${({ weight }) => styling[weight || 'LIGHT']};
+    color: ${({ theme, color }: { theme: any; color: any }) => theme[color || 'DARKEST']};
+    font-size: ${(size: keyof sizingProps) => (typeof size === 'string' ? sizing[size] : size) || sizing.MEDIUM}px;
+    font-family: ${(weight: keyof weightProps) => styling[weight || 'LIGHT']};
 `
 
 export default Text
