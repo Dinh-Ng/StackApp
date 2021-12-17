@@ -1,7 +1,6 @@
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, Text } from 'react-native'
 
-import Text from '@core/Text'
 import HomeHeader from '@modules/UI/components/HomeHeader'
 
 interface QuestionProps {

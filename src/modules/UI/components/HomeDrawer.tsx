@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { StyleSheet } from 'react-native'
-import Text from '@core/Text'
+import { StyleSheet, Text } from 'react-native'
+
 import metrics from '@styles/metrics'
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
 import Icon from 'react-native-vector-icons/FontAwesome'

@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react'
-import { StyleSheet, View, FlatList } from 'react-native'
+import { StyleSheet, View, FlatList, Text } from 'react-native'
 import {  TouchableWithoutFeedback } from 'react-native-gesture-handler'
 import { useRequest } from 'ahooks'
 
-import Text from '@core/Text'
 import { sizing } from '@styles/fonts'
 import metrics from '@styles/metrics'
 import request from 'src/api/request'
