@@ -54,7 +54,7 @@
       "@styles/*": ["./src/shared/styles/*"],
       "@core/*": ["./src/shared/core/*"],
       "@helpers/*": ["./src/shared/helpers/*"],
-      "@services/*": ["./src/shared/services/*"],
+      "@services/*": ["./src/services/*"],
 
       "@navigation/*": ["./src/navigation/*"],
       "@store/*": ["./src/store/*"],
