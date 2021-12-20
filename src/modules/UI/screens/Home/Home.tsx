@@ -8,6 +8,7 @@ import metrics from '@styles/metrics'
 import request from 'src/api/request'
 import { logger } from 'src/utilities/logger'
 import HomeHeader from '@modules/UI/components/HomeHeader'
+import StyledText from 'src/shared/components/StyledText'
 
 interface HomeProps {
     navigation: any
@@ -38,7 +39,7 @@ const Home: React.FC<HomeProps> = ({ navigation, route }: HomeProps) => {
                 />
                 <Text children={item?.view_count + ' views'} style={styles.voteText} />
             </View>
-            <Text children={item?.title} style={styles.title} />
+            <StyledText text={item?.title} customStyle={styles.title} />
             <View style={styles.tagContainer}>
                 {item?.tags?.map((tag: any, index: number) => (
                     <View style={styles.tag} key={index}>
