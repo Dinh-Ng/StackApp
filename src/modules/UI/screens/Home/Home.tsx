@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { StyleSheet, View, FlatList, Text } from 'react-native'
-import {  TouchableWithoutFeedback } from 'react-native-gesture-handler'
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
 import { useRequest } from 'ahooks'
 
 import { sizing } from '@styles/fonts'
@@ -55,8 +55,6 @@ const Home: React.FC<HomeProps> = ({ navigation, route }: HomeProps) => {
     }, [])
 
     logger('data', false, getListRequest.data)
-
-    console.log(`getListRequest.loading`, getListRequest.loading)
 
     return (
         <View style={styles.container}>

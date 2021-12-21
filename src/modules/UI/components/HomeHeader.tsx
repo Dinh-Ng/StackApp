@@ -4,7 +4,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 import Icon from 'react-native-vector-icons/Feather'
 
 interface HomeHeaderProps {
-    onPressMenu?(): any
+    onPressMenu?(params?: any): void
 }
 
 const HomeHeader: React.FC<HomeHeaderProps> = ({ onPressMenu }: HomeHeaderProps) => {
