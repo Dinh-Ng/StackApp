@@ -13,7 +13,8 @@
     "clearIos": "yarn cleanModules; cd ios/; pod deintegrate; pod install; cd ..; yarn cleanWatchman; yarn ios; yarn start --reset-cache",
     "test": "jest",
     "lint": "eslint ./src/",
-    "linkDevice": "adb reverse tcp:8081 tcp:8081; adb reverse tcp:9090 tcp:9090"
+    "linkDevice": "adb reverse tcp:8081 tcp:8081; adb reverse tcp:9090 tcp:9090",
+    "dev-menu": "adb shell input keyevent 82"
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.12.1",
@@ -68,6 +69,7 @@
     "prettier": "^2.0.5",
     "prettier-eslint": "^11.0.0",
     "react-test-renderer": "16.13.1",
+    "reactotron-core-client": "^2.8.10",
     "reactotron-react-native": "^5.0.0",
     "reactotron-redux": "^3.1.3",
     "typescript": "^3.9.7"
