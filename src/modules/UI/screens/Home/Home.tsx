@@ -9,9 +9,11 @@ import request from 'src/api/request'
 import { logger } from 'src/utilities/logger'
 import HomeHeader from '@modules/UI/components/HomeHeader'
 import StyledText from 'src/shared/components/StyledText'
+import {NavigationProp, ParamListBase} from '@react-navigation/native';
+import { DrawerNavigationProp } from '@react-navigation/drawer'
 
 interface HomeProps {
-    navigation: any
+    navigation: NavigationProp<ParamListBase> & DrawerNavigationProp<ParamListBase>
     route: any
 }
 
