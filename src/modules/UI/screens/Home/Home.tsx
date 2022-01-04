@@ -9,12 +9,22 @@ import request from 'src/api/request'
 import { logger } from 'src/utilities/logger'
 import HomeHeader from '@modules/UI/components/HomeHeader'
 import StyledText from 'src/shared/components/StyledText'
-import {NavigationProp, ParamListBase} from '@react-navigation/native';
+import { NavigationProp, ParamListBase } from '@react-navigation/native'
 import { DrawerNavigationProp } from '@react-navigation/drawer'
 
 interface HomeProps {
     navigation: NavigationProp<ParamListBase> & DrawerNavigationProp<ParamListBase>
     route: any
+}
+
+interface ItemProps {
+    question_id: Number
+    score: Number
+    answer_count: Number
+    view_count: Number
+    is_answered: boolean
+    title: string
+    tags: string[]
 }
 
 const Home: React.FC<HomeProps> = ({ navigation, route }: HomeProps) => {
@@ -27,30 +37,35 @@ const Home: React.FC<HomeProps> = ({ navigation, route }: HomeProps) => {
 
     logger('route', false, route)
 
-    const renderItem = (item: any) => (
-        <TouchableWithoutFeedback style={styles.item} onPress={() => navigation.navigate('Question')}>
-            <View style={styles.voteContainer}>
-                <Text children={item?.score + ' votes'} style={styles.voteText} />
-                <Text
-                    children={item?.answer_count + (item?.answer_count > 1 ? ' answers' : ' answer')}
-                    style={[
-                        styles.voteText,
-                        item?.answer_count > 0 && styles.answerText,
-                        item?.is_answered && styles.answerAcceptText,
-                    ]}
-                />
-                <Text children={item?.view_count + ' views'} style={styles.voteText} />
-            </View>
-            <StyledText text={item?.title} customStyle={styles.title} />
-            <View style={styles.tagContainer}>
-                {item?.tags?.map((tag: any, index: number) => (
-                    <View style={styles.tag} key={index}>
-                        <Text children={tag} style={styles.tagText} />
-                    </View>
-                ))}
-            </View>
-        </TouchableWithoutFeedback>
-    )
+    const renderItem = (item: ItemProps) => {
+        return (
+            <TouchableWithoutFeedback
+                style={styles.item}
+                onPress={() => navigation.navigate('Question', { id: item.question_id })}
+            >
+                <View style={styles.voteContainer}>
+                    <Text children={item?.score + ' votes'} style={styles.voteText} />
+                    <Text
+                        children={item?.answer_count + (item?.answer_count > 1 ? ' answers' : ' answer')}
+                        style={[
+                            styles.voteText,
+                            item?.answer_count > 0 && styles.answerText,
+                            item?.is_answered && styles.answerAcceptText,
+                        ]}
+                    />
+                    <Text children={item?.view_count + ' views'} style={styles.voteText} />
+                </View>
+                <StyledText text={item?.title} customStyle={styles.title} />
+                <View style={styles.tagContainer}>
+                    {item?.tags?.map((tag: any, index: number) => (
+                        <View style={styles.tag} key={index}>
+                            <Text children={tag} style={styles.tagText} />
+                        </View>
+                    ))}
+                </View>
+            </TouchableWithoutFeedback>
+        )
+    }
 
     useEffect(() => {
         getListRequest.run()
