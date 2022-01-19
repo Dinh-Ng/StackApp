@@ -35,6 +35,8 @@ const Home: React.FC<HomeProps> = ({ navigation, route }: HomeProps) => {
         loadMore: false,
     })
 
+    console.log(`metrics.safeTopPadding`, metrics.safeTopPadding)
+
     logger('route', false, route)
 
     const renderItem = (item: ItemProps) => {

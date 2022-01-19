@@ -4,6 +4,8 @@ import { StyleSheet, Text } from 'react-native'
 import metrics from '@styles/metrics'
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
 import Icon from 'react-native-vector-icons/FontAwesome'
+import { useDispatch } from 'react-redux'
+import { themeActions } from '@store/slices/theme.slice'
 
 interface HomeDrawerProps {
     navigation: any
@@ -11,6 +13,7 @@ interface HomeDrawerProps {
 
 const HomeDrawer: React.FC<HomeDrawerProps> = ({navigation}: HomeDrawerProps) => {
     const [index, setIndex] = useState<Number>(0)
+    const dispatch = useDispatch()
 
     const Children = ({ indexC, icon, iconSize, name, onPress }: any) => {
         return (
@@ -24,6 +27,10 @@ const HomeDrawer: React.FC<HomeDrawerProps> = ({navigation}: HomeDrawerProps) =>
         )
     }
 
+    const changeTheme = () => {
+        dispatch(themeActions.toggleTheme())
+    }
+
     return (
         <ScrollView style={styles.container}>
             <Children onPress={() => navigation.closeDrawer()} icon="close" iconSize={28} />
@@ -34,6 +41,8 @@ const HomeDrawer: React.FC<HomeDrawerProps> = ({navigation}: HomeDrawerProps) =>
             <Text children="FIND A JOB" style={styles.groupText} />
             <Children indexC={3} onPress={() => setIndex(3)} name="Jobs" />
             <Children indexC={4} onPress={() => setIndex(4)} name="Companies" />
+            <Text children="SETTINGS" style={styles.groupText} />
+            <Children indexC={4} onPress={() => changeTheme()} name="Change Themes" />
         </ScrollView>
     )
 }
